@@ -1,0 +1,27 @@
+*{
+    font-family: 'Roboto Regular';
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    text-decoration: none;
+    list-style: none;
+}
+
+.sentence::after{
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 30px;
+    background: red;
+    animation: pisca .6s ease-in-out infinite;
+}
+
+@keyframes pisca {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
