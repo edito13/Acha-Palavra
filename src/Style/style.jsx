@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { Button, Dialog } from '@material-ui/core'
+
 
 export const Container = styled.div`
   height: 100vh;
@@ -9,5 +11,334 @@ export const Container = styled.div`
   img{
     width: 100%;
     max-width: 400px;
+  }
+
+  header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 50px;
+
+    h1 img{
+      max-width: 250px;
+    }
+  }
+
+  section{
+    position: relative;
+    display: flex;
+    justify-content: center;
+
+    form{
+      position: absolute;
+      padding: 0px 20px;
+      width: 100%;
+      max-width: 400px;
+    }
+  }
+`;
+
+export const Modal = styled(Dialog)`
+  && .MuiDialog-paperWidthSm{
+      width: 100%;
+      max-width: 500px;
+  }
+`
+
+export const ContainerModal = styled.div`
+    padding: 50px;
+    width: 100%;
+    background: ${({ Theme }) => Theme === 'Light' ? '#fff' : '#000a1f'};
+    color: ${({ Theme }) => Theme === 'Light' ? '#000a1f' : '#fff'};
+
+    
+    h3{
+        font-weight: 500;
+        font-size: 1.4em;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    form{
+        div{
+            width: 100%;
+            
+            label{
+                display: block;
+                margin-bottom: 5px;
+                font-size: 1.1em;
+            }
+
+            input{
+                width: 100%;
+                border: none;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                padding: 6px 10px;
+                font-size: 1.3em;
+            }
+        }
+
+        div + div{
+            margin-top: 25px;
+        }
+
+        div:nth-child(3){
+          display: flex;
+          justify-content: flex-end;
+          margin-top: 50px;
+        }
+    }
+`
+
+export const ButtonForm = styled(Button)`
+  &&{
+    background: #02c902;
+    color: #fff;
+    font-size: 1.2em;
+    text-transform: capitalize;
+    transition: .4s ease-in-out;
+  }
+
+  &&:hover{
+    background: #008b00;
+  }
+`;
+
+export const ThemeConfigComponents = styled.div`
+
+  display: flex;
+  gap: 10px;
+  align-items: center;
+
+  p{
+    font-size: 1.4em;
+  }
+
+  & > div{
+    display: flex;
+    align-items: center;
+    gap: .7em;
+
+    svg{
+      font-size: 2em;
+    }
+
+    div{
+      width: 70px;
+      background: #ccc;
+      border-radius: 20px;
+      cursor: pointer;
+      padding: 2px;
+      transition: .4s ease-in-out;
+
+      span{
+        display: block;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: #1d1e20;
+        border: 1px solid #444;
+        transform: translateX(0);
+        transition: .4s ease-in-out;
+      }
+    }
+  }
+
+  &.Dark{
+      svg:nth-child(3){
+        animation: appear .4s ease-in-out;
+      }
+      svg:nth-child(1){
+        visibility: hidden;
+      }
+
+      div div{
+        background: #0088cded;
+
+        span{
+          background: #fff;
+          transform: translateX(33px);
+          border: 1px solid #ccc;
+        }
+      }
+  }
+
+  &.Light{
+    div svg:nth-child(1){
+      animation: appear .4s ease-in-out;
+    }
+
+    div svg:nth-child(3){
+      visibility: hidden;
+    }
+  }
+
+  @keyframes appear{
+    from{
+      opacity: 0;
+      transform: scale(.7)
+    }to{
+      opacity: 1;
+      transform: scale(1)
+    }
+  }
+
+  @keyframes DarkAtivacted{
+    from{
+      transform: translateX(0)
+    }to{
+      transform: translateX(30px)
+    }
+  }
+  
+`;
+
+export const FormWords = styled.form`
+  padding: 0px 20px;
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+  transition: .5s ease-in-out;
+
+  &.hide{
+    transform: translateX(-300%);
+  }
+
+  div{
+    label{
+      display: block;
+      margin-bottom: 4px;
+      font-size: 1.4em;
+    }
+
+    input{
+      border: none;
+      border: 1px solid #ccc;
+      padding: 6px 10px;
+      font-size: 1.2em;
+      border-radius: 4px;
+      width: 100%;
+    }
+      
+    & + div{
+      margin-top: 40px;
+    }
+  }
+
+  div:nth-child(3){
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+  }
+`;
+export const FormTest = styled.form`
+  transform: translateX(-300%);
+  transition: .7s ease-in-out;
+
+  &.show{
+      transform: translateX(0);
+  }
+
+  & > div{
+    label{
+      display: block;
+      margin-bottom: 4px;
+      font-size: 1.4em;
+    }
+
+    div{
+      display: flex;
+      gap: .8em;
+      align-items: center;  
+  
+      input{
+        border: none;
+        border: 1px solid #ccc;
+        padding: 6px 10px;
+        font-size: 1.2em;
+        border-radius: 4px;
+        width: 100%;
+      }
+        
+    }
+    & + div{
+      margin-top: 40px;
+    }
+  }
+
+  div:nth-child(3){
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+  }
+
+  .statusInfo{
+    margin-top: 20px;
+    font-size: 1.2em;
+  }
+`;
+
+export const StartGameButton = styled(Button)`
+  &&{
+    background: ${({ theme }) => theme === 'Light' ? '#000a1f' : '#fff'};
+    color: ${({ theme }) => theme === 'Light' ? '#fff' : '#000a1f'};
+    padding: 8px;
+    text-transform: capitalize;
+    font-size: 1.3em;
+    transition: .4s ease-in-out;
+    width: 100%;
+  }
+
+  &&:hover{
+    background: ${({ Theme }) => Theme === 'Light' ? '#001238' : '#d3d3d3'};
+    color: ${({ Theme }) => Theme === 'Light' ? '#d3d3d3' : '#001238'};
+  }
+`;
+
+export const TestButton = styled(Button)`
+  &&:disabled{
+    background: #444;
+    color: #c1c1c1;
+    cursor: copy;
+  }
+`;
+
+export const ContainerModalResults = styled(ContainerModal)`
+  background: #fff;
+  color: #000a1f;
+
+  h1{
+    text-align: center;
+    margin-bottom: 6px;
+  }
+
+  .Loading{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+
+    & > *{
+      animation: appear 1s ease-in-out backwards;
+    }
+    
+    img{
+      animation-delay: 1s;
+      margin: 20px auto;
+    }
+    
+    p{
+      animation-delay: 1.7s;
+      animation-duration: 1.2s;
+    }
+
+    @keyframes appear{
+      from{
+        opacity: 0;
+      }to{
+        opacity: 1;
+      }
+    }
   }
 `;

@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
-import styled from 'styled-components'
 import { Button } from '@material-ui/core'
-import ThemeContext from '../Config/ThemeContext'
 import { PlayCircleFilled } from '@material-ui/icons'
+import styled from 'styled-components'
+import ThemeContext from '../Config/ThemeContext'
 
 const ButtonPlayStyle = styled(Button)`
     &&{
@@ -44,16 +44,15 @@ const ButtonPlay = () => {
     const navigate = useNavigate()
     const { Theme } = useContext(ThemeContext)
 
-
-    return <ButtonPlayStyle 
-                onClick={() => navigate('/nada')} 
-                variant='contained' 
-                startIcon={<PlayCircleFilled />} 
-                theme={Theme}
-                disableElevation
-            >
-                Play Game
-            </ButtonPlayStyle>
-} 
+    return <ButtonPlayStyle
+            onClick={() => navigate('/start')}
+            variant='contained'
+            startIcon={<PlayCircleFilled />}
+            theme={Theme}
+            disableElevation
+        >
+        Play Game
+    </ButtonPlayStyle>
+}
 
 export default ButtonPlay
