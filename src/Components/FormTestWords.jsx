@@ -1,9 +1,10 @@
 /* eslint-disable no-throw-literal */
 import React, { useContext, useEffect, useState } from 'react'
 import NamesContext from '../Config/NamesContext';
-import { FormTest, TestButton } from '../Style/style';
-import ModalShowResults from './Modais/ModalShowResults';
-import ModalWordsTestResults from './Modais/ModalWordsTestResults';
+import { FormTest } from '../Style/style';
+import ModalShowResults from './Modals/ModalShowResults';
+import ModalWordsTestResults from './Modals/ModalWordsTestResults';
+import TestButton from './TestButton';
 
 const FormTestWords = props => {
 
@@ -22,12 +23,6 @@ const FormTestWords = props => {
 
     const [OpenModalEnd, setOpenModalEnd] = useState(false);
     const [OpenModalTest, setOpenModalTest] = useState(false);
-
-    useEffect(() => {
-        const { StatusResultPlayer1, StatusResultPlayer2 } = StatusGame
-        // If the Game isn't over, then Show the test results
-        if (StatusResultPlayer1 !== '' || StatusResultPlayer2 !== '') setOpenModalTest(true)
-    }, [StatusGame.StatusResultPlayer1, StatusGame.StatusResultPlayer2]);
 
     const handleCloseModalTest = () => {
         setOpenModalTest(false)
@@ -70,6 +65,8 @@ const FormTestWords = props => {
                     localStorage.setItem('LettersFindedByPlayer1', JSON.stringify(LettersFinded))
                     setStatusGame({ ...StatusGame, StatusResultPlayer2: 'Not win', GameResult: '' })
                 }
+
+                setOpenModalTest(true)
             } catch (error) {
                 alert('Erro: ' + error)
             }
@@ -99,6 +96,8 @@ const FormTestWords = props => {
                     }
                     setStatusGame({ ...StatusGame, StatusResultPlayer2: 'Not win' })
                 }
+
+                setOpenModalTest(true)
             } catch (error) {
                 alert('Erro: ' + error)
             }
@@ -107,8 +106,10 @@ const FormTestWords = props => {
 
     const FindLetters = (wordPlayer, wordAdversary) => {
         const wordPlayerLetters  = wordPlayer.split('')
-        const lettersFinded = wordPlayerLetters.filter((letter, index, array) => wordAdversary.includes(letter) && array.lastIndexOf(letter) === index)
-        return lettersFinded
+        const lettersIncludiedInAdversaryWord = wordPlayerLetters.filter((letter, index, array) =>  wordAdversary.includes(letter) && array.lastIndexOf(letter) === index)
+        const wordAdversaryLetters = wordAdversary.split('')
+        const lettersFindedByPlayer = wordAdversaryLetters.filter(letter => lettersIncludiedInAdversaryWord.includes(letter))
+        return lettersFindedByPlayer
     }
 
     return (
@@ -117,14 +118,14 @@ const FormTestWords = props => {
                 <label htmlFor="wordTest1">Palavra de {PlayersNames.player2 ? PlayersNames.player2 : 'Jogador 2'}</label>
                 <div>
                     <input type="password" name='PlayerTestWord1' value={PlayersTestWords.PlayerTestWord1} id='wordTest1' maxLength={5} onChange={handleChange} disabled={StatusGame.PlayerIsTesting === 'player2' ? true : false} />
-                    <TestButton variant='contained' onClick={() => MakeWordsTest(1)} disabled={StatusGame.PlayerIsTesting === 'player2' ? true : false} disableElevation>Testar</TestButton>
+                    <TestButton id_player={1} MakeWordsTest={MakeWordsTest} disabled={StatusGame.PlayerIsTesting === 'player2' ? true : false}/>
                 </div>
             </div>
             <div>
                 <label htmlFor="wordTest2">Palavra de {PlayersNames.player1 ? PlayersNames.player1 : 'Jogador 1'}</label>
                 <div>
                     <input type="password" name='PlayerTestWord2' value={PlayersTestWords.PlayerTestWord2} id='wordTest2' maxLength={5} onChange={handleChange} disabled={StatusGame.PlayerIsTesting === 'player1' ? true : false} />
-                    <TestButton variant='contained' onClick={() => MakeWordsTest(2)} disabled={StatusGame.PlayerIsTesting === 'player1' ? true : false} disableElevation>Testar</TestButton>
+                    <TestButton id_player={2} MakeWordsTest={MakeWordsTest} disabled={StatusGame.PlayerIsTesting === 'player1' ? true : false} />
                 </div>
             </div>
             <p className='statusInfo'><strong>Status do Jogo:</strong> Vez de {StatusGame.PlayerIsTesting === 'player1' ? PlayersNames.player1 || 'Jogador 1' : PlayersNames.player2 || 'Jogador 2'} testar.</p>

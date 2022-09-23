@@ -22,7 +22,6 @@ const Home = () => {
             <img src={`img/Acha jogo LOGO${Theme === 'Dark' ? ' branco' : ''}.png`} alt="Acha palavra"/>
             {Loading && <p>Loading <span>...</span></p>}
             {!Loading && <ButtonPlay />}
-
         </ContainerStart>
     )
 }

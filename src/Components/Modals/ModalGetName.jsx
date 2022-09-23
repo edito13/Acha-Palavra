@@ -1,8 +1,8 @@
 /* eslint-disable no-throw-literal */
 import React,{ useContext, useState } from 'react'
-import { ContainerModal, Modal } from '../Style/style'
-import FormularioGetNames from './FormularioGetNames'
-import NamesContext from '../Config/NamesContext'
+import { ContainerModal, Modal } from '../../Style/style'
+import FormularioGetNames from '../FormularioGetNames'
+import NamesContext from '../../Config/NamesContext'
 
 const ModalGetName = ({ open, onClose }) => {
 

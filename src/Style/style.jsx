@@ -5,6 +5,7 @@ import { Button, Dialog } from '@material-ui/core'
 export const Container = styled.div`
   height: 100vh;
   width: 100%;
+  overflow-x: hidden;
   background: ${({ Theme }) => Theme === 'Light' ? '#fff' : '#000a1f'};
   color: ${({ Theme }) => Theme === 'Light' ? '#000a1f' : '#fff'};
 
@@ -281,7 +282,7 @@ export const FormTest = styled.form`
 
 export const StartGameButton = styled(Button)`
   &&{
-    background: ${({ theme }) => theme === 'Light' ? '#000a1f' : '#fff'};
+    background: ${({ theme }) => theme === 'Light' ? '#000a1f' : ''};
     color: ${({ theme }) => theme === 'Light' ? '#fff' : '#000a1f'};
     padding: 8px;
     text-transform: capitalize;
@@ -291,8 +292,8 @@ export const StartGameButton = styled(Button)`
   }
 
   &&:hover{
-    background: ${({ Theme }) => Theme === 'Light' ? '#001238' : '#d3d3d3'};
-    color: ${({ Theme }) => Theme === 'Light' ? '#d3d3d3' : '#001238'};
+    background: ${({ theme }) => theme === 'Light' ? '#002064' : '#d3d3d3'};
+    color: ${({ theme }) => theme === 'Light' ? '#d3d3d3' : '#002064'};
   }
 `;
 
@@ -339,6 +340,36 @@ export const ContainerModalResults = styled(ContainerModal)`
       }to{
         opacity: 1;
       }
+    }
+  }
+`;
+
+export const ConfigMenuContainer = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background:  ${({Theme}) => Theme === 'Dark' ?  '#fff' : '#000a1f' };
+  color:  ${({Theme}) => Theme !== 'Dark' ?  '#fff' : '#000a1f' };
+  width: 100%;
+  padding: 30px; 
+  max-width: 25vw;
+  transform: translateX(-100%);
+  transition: .5s ease-in-out;
+
+  &.Show{
+    transform: translateX(0);
+  }
+`;
+
+export const ButtonConfig = styled(Button)`
+  &&{
+    background: #e8e8e8;
+    font-size: 1.3em;
+    text-transform: capitalize;
+
+    svg{
+      font-size: 1.5em;
     }
   }
 `;
