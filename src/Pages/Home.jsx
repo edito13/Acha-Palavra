@@ -1,12 +1,12 @@
 /* eslint-disable no-throw-literal */
 import React, { useContext, useEffect, useState } from 'react'
-import { ButtonConfig, Container } from '../Style/style';
+import { ButtonConfig, Container, TitleTooltip } from '../Style/style';
 import ThemeContext from '../Config/ThemeContext';
 import FormChooseWords from '../Components/FormChooseWords';
 import FormTestWords from '../Components/FormTestWords';
 import ModalGetName from '../Components/Modals/ModalGetName';
 import ConfigMenu from '../Components/ConfigMenu';
-import { Button, IconButton } from '@material-ui/core';
+import { Button, IconButton, Tooltip } from '@material-ui/core';
 import { Settings } from '@material-ui/icons';
 
 const Home = () => {
@@ -29,9 +29,11 @@ const Home = () => {
                     <h1>
                         <img src={`img/Acha jogo LOGO${Theme === 'Dark' ? ' branco' : ''}.png`} alt="Acha palavra" />
                     </h1>
-                    <ButtonConfig variant='contained' endIcon={<Settings />} onClick={() => setShowMenu(!ShowMenu)} disableElevation>
-                        Configurações
-                    </ButtonConfig>
+                    <Tooltip title={<TitleTooltip>Aceder definições</TitleTooltip>} arrow placement='bottom'>
+                        <ButtonConfig variant='contained' endIcon={<Settings />} onClick={() => setShowMenu(!ShowMenu)} disableElevation>
+                            Configurações
+                        </ButtonConfig>
+                    </Tooltip>
                 </header>
                 <section>
                     <FormChooseWords className={Testing ? 'hide' : ''} setTesting={setTesting} />

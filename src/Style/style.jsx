@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { Button, Dialog } from '@material-ui/core'
 
-
 export const Container = styled.div`
   height: 100vh;
   width: 100%;
@@ -349,17 +348,75 @@ export const ConfigMenuContainer = styled.div`
   top: 0;
   left: 0;
   bottom: 0;
-  background:  ${({Theme}) => Theme === 'Dark' ?  '#fff' : '#000a1f' };
-  color:  ${({Theme}) => Theme !== 'Dark' ?  '#fff' : '#000a1f' };
+  display: flex;
+  flex-direction: column;
+  background:  ${({ Theme }) => Theme === 'Dark' ?  '#fff' : '#000a1f' };
+  color:  ${({ Theme }) => Theme !== 'Dark' ?  '#fff' : '#000a1f' };
   width: 100%;
-  padding: 30px; 
-  max-width: 25vw;
+  height: 100vh;
+  padding: 50px 30px 30px; 
+  max-width: 350px;
   transform: translateX(-100%);
   transition: .5s ease-in-out;
 
   &.Show{
     transform: translateX(0);
   }
+
+  ul{
+    margin-top: 10vh;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    li{  
+      transition: .3s ease-in-out;
+      display: block;
+      border-left: 2px solid transparent;
+      
+      a{
+        padding: 10px 0;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 1.2em;
+        color:  ${({Theme}) => Theme !== 'Dark' ?  '#fff' : '#000a1f' };
+        transition: .3s ease-in-out;
+      }
+
+      &:hover{
+        border-left-color: #3ee;
+
+        a{
+          padding-left: 14px;
+          color: #3ee;
+        }
+      }
+    }
+  }
+
+  footer{
+    justify-self: end;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    border-top: 1px solid #e8e8e8;
+    margin-top: 26vh;
+    padding-top: 20px;
+
+    img{
+      max-width: 50%;
+      margin-bottom: 8px;
+    }
+
+    p{
+      color: ${({Theme}) => Theme !== 'Dark' ?  '#eee' : '#000a1f' };
+      letter-spacing: .5px;
+      text-align: center;
+    }
+  }
+
 `;
 
 export const ButtonConfig = styled(Button)`
@@ -372,4 +429,9 @@ export const ButtonConfig = styled(Button)`
       font-size: 1.5em;
     }
   }
+`;
+
+export const TitleTooltip = styled.p`
+  font-size: 1.5em;
+  padding: 5px;
 `;
