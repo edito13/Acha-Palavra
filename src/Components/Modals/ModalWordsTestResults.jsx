@@ -8,15 +8,13 @@ const ModalWordsTestResults = ({ Status, ...props }) => {
   const [Player, setPlayer] = useState({});
   const [Loading, setLoading] = useState(true);
 
-  console.log('Teste')
-
   useEffect(() => {
     setTimeout(() => setLoading(false), 4000)
   }, [])
 
   useEffect(() => {
     // Get the Data's player is testing at moment
-
+    
     setPlayer({
       name: Status.PlayerIsTesting === 'player1' ? PlayersNames.player1 || 'Jogador 1': PlayersNames.player2 || 'Jogador 2',
       statusPlayer: Status.PlayerIsTesting === 'player1' ? Status.StatusResultPlayer1 : Status.StatusResultPlayer2,

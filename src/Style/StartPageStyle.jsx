@@ -16,7 +16,7 @@ export const ContainerStart = styled(Container)`
   }
 
   img{
-    animation: appear 1s .4s ease-in-out backwards;
+    animation: appear .9s .9s ease-in-out backwards;
     
     @keyframes appear{
         from{
@@ -32,7 +32,7 @@ export const ContainerStart = styled(Container)`
   p{
     font-size: 1.6em;
     color: ${({ Theme }) => Theme === 'Dark' ? '#eee' : '#000a1f'};
-    animation: appear 1s .8s ease-in-out backwards;
+    animation: appear .9s 2.3s ease-in-out backwards;
     
     @keyframes appear{
         from{

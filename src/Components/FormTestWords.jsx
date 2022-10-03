@@ -1,5 +1,5 @@
 /* eslint-disable no-throw-literal */
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import NamesContext from '../Config/NamesContext';
 import { FormTest } from '../Style/style';
 import ModalShowResults from './Modals/ModalShowResults';
@@ -11,13 +11,13 @@ const FormTestWords = props => {
     const { PlayersNames } = useContext(NamesContext)
 
     const [PlayersTestWords, setPlayersTestWords] = useState({
-        PlayerTestWord1: 'cinco',
+        PlayerTestWord1: '',
         PlayerTestWord2: ''
     });
     const [StatusGame, setStatusGame] = useState({
         StatusResultPlayer1: '',
         StatusResultPlayer2: '',
-        PlayerIsTesting: 'player2',
+        PlayerIsTesting: 'player1',
         GameResult: ''
     });
 
@@ -31,6 +31,10 @@ const FormTestWords = props => {
             setOpenModalTest(false)
             setTimeout(() => setOpenModalEnd(true), 2000)
         }
+    }
+
+    const handleCloseModalEnd = () => {
+        setOpenModalEnd(false)
     }
 
     const handleChange = e => {
@@ -54,17 +58,16 @@ const FormTestWords = props => {
 
             try {
                 // If the word is empty, so it returns a throw
-                if (PlayerTestWord2 === '') throw 'Nenhum dos campos pode ficar vazio!'
+                if (PlayerTestWord1 === '') throw 'Nenhum dos campos pode ficar vazio!'
                 // If the word contains some number it returns a throw
-                else if ((/\d/g).test(PlayerTestWord2)) throw 'A palavra não pode conter números!'
+                else if ((/\d/g).test(PlayerTestWord1)) throw 'A palavra não pode conter números!'
                 // The word should just have five characters
-                else if (PlayerTestWord2.length !== 5) throw 'A palavra tem que ter exactamente 5 caracteres!'
+                else if (PlayerTestWord1.length !== 5) throw 'A palavra tem que ter exactamente 5 caracteres!'
                 else if (PlayerTestWord1 === WordPlayer2) setStatusGame({ ...StatusGame, StatusResultPlayer1: 'Win' })
-                else {
-                    const LettersFinded = FindLetters(PlayerTestWord1, WordPlayer2)
-                    localStorage.setItem('LettersFindedByPlayer1', JSON.stringify(LettersFinded))
-                    setStatusGame({ ...StatusGame, StatusResultPlayer2: 'Not win', GameResult: '' })
-                }
+                else setStatusGame({ ...StatusGame, StatusResultPlayer1: 'Not Win' })
+
+                const LettersFinded = FindLetters(PlayerTestWord1, WordPlayer2)
+                localStorage.setItem('LettersFindedByPlayer1', JSON.stringify(LettersFinded))
 
                 setOpenModalTest(true)
             } catch (error) {
@@ -74,8 +77,6 @@ const FormTestWords = props => {
         } else {
             // Player2 is playing right now
 
-            console.log('Chegou aqui')
-
             try {
                 // If the word is empty, so it returns a throw
                 if (PlayerTestWord2 === '') throw 'Nenhum dos campos pode ficar vazio!'
@@ -84,18 +85,16 @@ const FormTestWords = props => {
                 // The word should just have five characters
                 else if (PlayerTestWord2.length !== 5) throw 'A palavra tem que ter exactamente 5 caracteres!'
                 else if (PlayerTestWord2 === WordPlayer1) {
-                    if (StatusGame.StatusResultPlayer1 !== 'Win') setStatusGame({ ...StatusGame, GameResult: 'Jogador 2 venceu' })
-                    else setStatusGame({ ...StatusGame, GameResult: 'Empate' })
-                    setStatusGame({ ...StatusGame, StatusResultPlayer2: 'Win' })
+                    if (StatusGame.StatusResultPlayer1 !== 'Win') setStatusGame({ ...StatusGame, StatusResultPlayer2: 'Win', GameResult: PlayersNames.player2+' venceu o jogo!' })
+                    else setStatusGame({ ...StatusGame, StatusResultPlayer2: 'Win', GameResult: 'Empate' })
                 }
                 else {
-                    if (StatusGame.StatusResultPlayer1 === 'Win') setStatusGame({ ...StatusGame, GameResult: 'Jogador 1 venceu' })
-                    else {
-                        const LettersFinded = FindLetters(PlayerTestWord2, WordPlayer1)
-                        localStorage.setItem('LettersFindedByPlayer2', JSON.stringify(LettersFinded))
-                    }
-                    setStatusGame({ ...StatusGame, StatusResultPlayer2: 'Not win' })
+                    if (StatusGame.StatusResultPlayer1 === 'Win') setStatusGame({ ...StatusGame, GameResult: PlayersNames.player1+' venceu o jogo!' })
+                    else setStatusGame({ ...StatusGame, GameResult: 'Empate' })
                 }
+
+                const LettersFinded = FindLetters(PlayerTestWord2, WordPlayer1)
+                localStorage.setItem('LettersFindedByPlayer2', JSON.stringify(LettersFinded))
 
                 setOpenModalTest(true)
             } catch (error) {
@@ -105,9 +104,9 @@ const FormTestWords = props => {
     }
 
     const FindLetters = (wordPlayer, wordAdversary) => {
-        const wordPlayerLetters  = wordPlayer.split('')
-        const lettersIncludiedInAdversaryWord = wordPlayerLetters.filter((letter, index, array) =>  wordAdversary.includes(letter) && array.lastIndexOf(letter) === index)
+        const wordPlayerLetters = wordPlayer.split('')
         const wordAdversaryLetters = wordAdversary.split('')
+        const lettersIncludiedInAdversaryWord = wordPlayerLetters.filter((letter, index, array) => wordAdversary.includes(letter) && array.lastIndexOf(letter) === index)
         const lettersFindedByPlayer = wordAdversaryLetters.filter(letter => lettersIncludiedInAdversaryWord.includes(letter))
         return lettersFindedByPlayer
     }
@@ -118,7 +117,7 @@ const FormTestWords = props => {
                 <label htmlFor="wordTest1">Palavra de {PlayersNames.player2 ? PlayersNames.player2 : 'Jogador 2'}</label>
                 <div>
                     <input type="password" name='PlayerTestWord1' value={PlayersTestWords.PlayerTestWord1} id='wordTest1' maxLength={5} onChange={handleChange} disabled={StatusGame.PlayerIsTesting === 'player2' ? true : false} />
-                    <TestButton id_player={1} MakeWordsTest={MakeWordsTest} disabled={StatusGame.PlayerIsTesting === 'player2' ? true : false}/>
+                    <TestButton id_player={1} MakeWordsTest={MakeWordsTest} disabled={StatusGame.PlayerIsTesting === 'player2' ? true : false} />
                 </div>
             </div>
             <div>
@@ -130,7 +129,7 @@ const FormTestWords = props => {
             </div>
             <p className='statusInfo'><strong>Status do Jogo:</strong> Vez de {StatusGame.PlayerIsTesting === 'player1' ? PlayersNames.player1 || 'Jogador 1' : PlayersNames.player2 || 'Jogador 2'} testar.</p>
             {OpenModalTest && <ModalWordsTestResults Status={StatusGame} open={OpenModalTest} onClose={handleCloseModalTest} />}
-            {OpenModalEnd && <ModalShowResults Status={StatusGame} open={OpenModalEnd} onClose={() => setOpenModalEnd(false)} />}
+            {OpenModalEnd && <ModalShowResults Status={StatusGame} open={OpenModalEnd} onClose={handleCloseModalEnd} />}
         </FormTest>
     )
 }

@@ -6,7 +6,7 @@ import FormChooseWords from '../Components/FormChooseWords';
 import FormTestWords from '../Components/FormTestWords';
 import ModalGetName from '../Components/Modals/ModalGetName';
 import ConfigMenu from '../Components/ConfigMenu';
-import { Button, IconButton, Tooltip } from '@material-ui/core';
+import { Tooltip } from '@material-ui/core';
 import { Settings } from '@material-ui/icons';
 
 const Home = () => {
@@ -17,7 +17,7 @@ const Home = () => {
     const [ShowMenu, setShowMenu] = useState(false);
 
     useEffect(() => {
-        setTimeout(() => setOpen(false), 1300)
+        setTimeout(() => setOpen(true), 1300)
     }, []);
 
     const onClose = () => setOpen(false)
@@ -29,7 +29,7 @@ const Home = () => {
                     <h1>
                         <img src={`img/Acha jogo LOGO${Theme === 'Dark' ? ' branco' : ''}.png`} alt="Acha palavra" />
                     </h1>
-                    <Tooltip title={<TitleTooltip>Aceder definições</TitleTooltip>} arrow placement='bottom'>
+                    <Tooltip title={<TitleTooltip>{ ShowMenu ? 'Fechar' : 'Abrir'} definições</TitleTooltip>} arrow placement='bottom'>
                         <ButtonConfig variant='contained' endIcon={<Settings />} onClick={() => setShowMenu(!ShowMenu)} disableElevation>
                             Configurações
                         </ButtonConfig>

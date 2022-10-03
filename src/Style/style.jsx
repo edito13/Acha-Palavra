@@ -2,9 +2,8 @@ import styled from 'styled-components';
 import { Button, Dialog } from '@material-ui/core'
 
 export const Container = styled.div`
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
-  overflow-x: hidden;
   background: ${({ Theme }) => Theme === 'Light' ? '#fff' : '#000a1f'};
   color: ${({ Theme }) => Theme === 'Light' ? '#000a1f' : '#fff'};
 
@@ -85,7 +84,7 @@ export const ContainerModal = styled.div`
 
         div:nth-child(3){
           display: flex;
-          justify-content: flex-end;
+          justify-content: center;
           margin-top: 50px;
         }
     }
@@ -307,18 +306,27 @@ export const TestButton = styled(Button)`
 export const ContainerModalResults = styled(ContainerModal)`
   background: #fff;
   color: #000a1f;
+  padding: 2em .5em;
 
   h1{
     text-align: center;
-    margin-bottom: 6px;
+    font-weight: 500;
+
+  }
+
+  & > div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2em;
   }
 
   .Loading{
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 5px;
-
+    gap: 2em;
+    
     & > *{
       animation: appear 1s ease-in-out backwards;
     }
@@ -326,9 +334,11 @@ export const ContainerModalResults = styled(ContainerModal)`
     img{
       animation-delay: 1s;
       margin: 20px auto;
+      transform: scale(1.6)
     }
     
     p{
+      font-size: 1.3em;
       animation-delay: 1.7s;
       animation-duration: 1.2s;
     }
@@ -338,6 +348,58 @@ export const ContainerModalResults = styled(ContainerModal)`
         opacity: 0;
       }to{
         opacity: 1;
+      }
+    }
+  }
+
+  .Results{
+    & > *{
+      animation: appear 1s ease-in-out backwards;
+    }
+    
+    img{
+      max-width: 280px;
+    }
+    
+    h1{
+      animation-delay: .7s;
+      font-size: 1.5em;
+    }
+
+    @keyframes appear{
+      from{
+        opacity: 0;
+        transform: scale(.7)
+      }to{
+        opacity: 1;
+        transform: scale(1)
+      }
+    }
+
+    .buttons{
+      width: 100%;
+      max-width: 70%;
+      display: flex;
+      gap: 1.5em;
+      
+      button{
+        flex: 1;
+        text-transform: capitalize;
+        font-size: 1.2em;
+        transition: .4s ease-in-out;
+        border-left: 3px solid transparent;
+      }      
+      
+      button:nth-child(2){
+        background: linear-gradient(#e31515, #b70101);
+        color: #fff;
+        text-shadow: 1px 1px 2px 3px #e31515;
+        max-width: 100px;
+        transition: .3s ease-in-out;
+
+        &:hover{
+          background: linear-gradient(#9d0404, #870000);
+        }
       }
     }
   }
@@ -434,4 +496,21 @@ export const ButtonConfig = styled(Button)`
 export const TitleTooltip = styled.p`
   font-size: 1.5em;
   padding: 5px;
+`;
+
+export const ButtonRenew = styled(Button)`
+  &&{
+    background: linear-gradient(#0ea7ff, #0381ca);
+    color: #fff;
+    text-shadow: 1px 1px 2px 3px #0ea7ff;
+    transition: .3s ease-in-out;
+    
+    svg{
+      font-size: 1.4em;
+    }
+  }
+
+  &&:hover{
+    background: linear-gradient(#016ca9, #014c78);
+  }
 `;
