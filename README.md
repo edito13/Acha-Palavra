@@ -3,7 +3,7 @@
 ## Sobre o Projecto
 Todo mundo já alguma vez sentiu-se que não consegue controlar a sua vida financeira ou ao menos, saber quanto gasta e quanto recebe. Nesta senda, este **Controle financeiro** permite listar todas as receitas e despesas de um usuário e calcular qual é o saldo actual(diferença entre o total de receitas e despesas).
 
-<img width="500px" height="300px" src='./public/img/Acha jogo LOGO.png'>
+<img width="600px" height="330px" src='./public/img/Acha jogo LOGO.png'>
 
 ***
 
