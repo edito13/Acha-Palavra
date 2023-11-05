@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import ButtonPlay from '../Components/ButtonPlay'
+import ModalGetName from '../Components/Modals/ModalGetName'
 import ThemeContext from '../Config/ThemeContext'
 import { ContainerStart } from '../Style/StartPageStyle'
 
@@ -13,15 +14,20 @@ const Home = () => {
     localStorage.removeItem('LettersFindedByPlayer2')
 
     const [Loading, setLoading] = useState(true);
+    const [Open, setOpen] = useState(false);
 
     useEffect(() => {
         setTimeout(() => setLoading(false), 4500)
     }, []);
+
+    const onClose = () => setOpen(false)
+
     return (
         <ContainerStart Theme={Theme}>
             <img src={`img/Acha jogo LOGO${Theme === 'Dark' ? ' branco' : ''}.png`} alt="Acha palavra"/>
             {Loading && <p>Loading <span>...</span></p>}
-            {!Loading && <ButtonPlay />}
+            {!Loading && <ButtonPlay onClick={() => setOpen(true)}/>}
+            {Open && <ModalGetName open={Open} onClose={onClose} />}
         </ContainerStart>
     )
 }

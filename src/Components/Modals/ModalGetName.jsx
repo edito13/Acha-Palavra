@@ -4,7 +4,6 @@ import { ContainerModal, Modal } from '../../Style/style'
 import FormularioGetNames from '../FormularioGetNames'
 
 const ModalGetName = ({ open, onClose }) => {
-
     return (
         <Modal open={open}>
             <ContainerModal>

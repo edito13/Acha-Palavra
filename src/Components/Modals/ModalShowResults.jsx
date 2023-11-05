@@ -1,8 +1,7 @@
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { Button, Tooltip } from '@material-ui/core';
 import { Autorenew, ExitToApp } from '@material-ui/icons';
-import React, { useEffect } from 'react'
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { ButtonRenew, ContainerModalResults, Modal, TitleTooltip } from '../../Style/style'
 
 const ModalShowResults = ({ Status, open, onClose }) => {
@@ -39,7 +38,7 @@ const ModalShowResults = ({ Status, open, onClose }) => {
                                 <img src={`img/${Status.GameResult === 'Empate' ? 'Group 98' : 'Asset 11@3x'}.png`} alt="resultado jogo" />
                                 <h1>{Status.GameResult}</h1>
                                 {
-                                    true && (
+                                    ShowButtons && (
                                         <div className="buttons">
                                             <Tooltip title={<TitleTooltip>Reiniciar o jogo</TitleTooltip>} placement='bottom' arrow>
                                                 <ButtonRenew onClick={() => navigate('/start')} startIcon={<Autorenew />} variant='contained' disableElevation>Reiniciar</ButtonRenew>

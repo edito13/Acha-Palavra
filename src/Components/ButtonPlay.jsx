@@ -1,58 +1,17 @@
 import React, { useContext } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { Button } from '@material-ui/core'
 import { PlayCircleFilled } from '@material-ui/icons'
-import styled from 'styled-components'
 import ThemeContext from '../Config/ThemeContext'
+import { ButtonPlayStyle } from '../Style/StartPageStyle'
 
-const ButtonPlayStyle = styled(Button)`
-    &&{
-        background: ${({ theme }) => theme === 'Dark' ? '#eee' : '#000a1f'};
-        color: ${({ theme }) => theme === 'Dark' ? '#000a1f' : '#eee'};
-        font-size: 1.2em;
-        padding: auto 30px;
-        margin-top: 15px;
-        animation: appear 1s .7s ease-in-out backwards;
-        transition: .4s ease-in-out;
+const ButtonPlay = props => {
 
-        svg{
-            font-size: 2em;
-        }
-
-    
-        @keyframes appear{
-            from{
-                opacity: 0;
-                transform: scale(.7)
-            }to{
-                opacity: 1;
-                transform: scale(1)
-            }
-        }
-    }
-
-    &&:hover{
-        letter-spacing: 5px;
-        background: ${({ theme }) => theme === 'Dark' ? '#eee' : '#000a1f'};
-        color: ${({ theme }) => theme === 'Dark' ? '#000a1f' : '#eee'};
-    }
-    
-`
-
-const ButtonPlay = () => {
-
-    const navigate = useNavigate()
     const { Theme } = useContext(ThemeContext)
 
-    return <ButtonPlayStyle
-            onClick={() => navigate('/start')}
-            variant='contained'
-            startIcon={<PlayCircleFilled />}
-            theme={Theme}
-            disableElevation
-        >
-        Play Game
-    </ButtonPlayStyle>
+    return (
+        <ButtonPlayStyle {...props} variant='contained' startIcon={<PlayCircleFilled />} theme={Theme} disableElevation>
+            Play Game
+        </ButtonPlayStyle>
+    )
 }
 
 export default ButtonPlay

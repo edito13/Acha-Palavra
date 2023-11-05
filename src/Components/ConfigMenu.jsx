@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { Tooltip } from '@material-ui/core' 
 import { Games, FormatQuote, LibraryBooks } from '@material-ui/icons'
 import { ConfigMenuContainer, TitleTooltip } from '../Style/style'
 import ThemeConfig from './ThemeConfig'
-import { Tooltip } from '@material-ui/core'
 
 
 const ConfigMenu = ({ Theme, ShowMenu }) => {
@@ -28,10 +28,10 @@ const ConfigMenu = ({ Theme, ShowMenu }) => {
           </Tooltip>
         </li>
         <li>
-          <Tooltip title={<TitleTooltip>Saiba tudo sobre o jogo</TitleTooltip>} arrow placement='right'>
+          <Tooltip title={<TitleTooltip>Saiba mais sobre o jogo</TitleTooltip>} arrow placement='right'>
             <Link to={'/about'}>
               <FormatQuote />
-              Sobre o acha 5
+              Sobre o <span>Acha Palavra</span>
             </Link>
           </Tooltip>
         </li>

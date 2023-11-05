@@ -97,6 +97,10 @@ export const ButtonForm = styled(Button)`
     font-size: 1.2em;
     text-transform: capitalize;
     transition: .4s ease-in-out;
+    
+    svg{
+      font-size: 1.4em;
+    }
   }
 
   &&:hover{
@@ -280,18 +284,22 @@ export const FormTest = styled.form`
 
 export const StartGameButton = styled(Button)`
   &&{
-    background: ${({ theme }) => theme === 'Light' ? '#000a1f' : ''};
-    color: ${({ theme }) => theme === 'Light' ? '#fff' : '#000a1f'};
+    background: linear-gradient(#0ea7ff, #0381ca);
+    color: #fff;
+    text-shadow: 1px 1px 2px 3px #0ea7ff;
     padding: 8px;
     text-transform: capitalize;
     font-size: 1.3em;
     transition: .4s ease-in-out;
     width: 100%;
+    
+    svg{
+      font-size: 1.4em;
+    }
   }
 
   &&:hover{
-    background: ${({ theme }) => theme === 'Light' ? '#002064' : '#d3d3d3'};
-    color: ${({ theme }) => theme === 'Light' ? '#d3d3d3' : '#002064'};
+    background: linear-gradient(#016ca9, #014c78);
   }
 `;
 
@@ -326,7 +334,7 @@ export const ContainerModalResults = styled(ContainerModal)`
     flex-direction: column;
     align-items: center;
     gap: 2em;
-    
+
     & > *{
       animation: appear 1s ease-in-out backwards;
     }

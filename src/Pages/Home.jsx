@@ -1,26 +1,18 @@
 /* eslint-disable no-throw-literal */
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
+import { Tooltip } from '@material-ui/core';
+import { Settings } from '@material-ui/icons';
 import { ButtonConfig, Container, TitleTooltip } from '../Style/style';
 import ThemeContext from '../Config/ThemeContext';
 import FormChooseWords from '../Components/FormChooseWords';
 import FormTestWords from '../Components/FormTestWords';
-import ModalGetName from '../Components/Modals/ModalGetName';
 import ConfigMenu from '../Components/ConfigMenu';
-import { Tooltip } from '@material-ui/core';
-import { Settings } from '@material-ui/icons';
 
 const Home = () => {
 
     const { Theme } = useContext(ThemeContext)
     const [Testing, setTesting] = useState(false);
-    const [Open, setOpen] = useState(false);
     const [ShowMenu, setShowMenu] = useState(false);
-
-    useEffect(() => {
-        setTimeout(() => setOpen(true), 1300)
-    }, []);
-
-    const onClose = () => setOpen(false)
 
     return (
         <>
@@ -39,8 +31,6 @@ const Home = () => {
                     <FormChooseWords className={Testing ? 'hide' : ''} setTesting={setTesting} />
                     <FormTestWords className={Testing ? 'show' : ''} />
                 </section>
-
-                {Open && <ModalGetName open={Open} onClose={onClose} />}
             </Container>
             <ConfigMenu ShowMenu={ShowMenu} Theme={Theme} />
         </>
