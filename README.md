@@ -1,13 +1,13 @@
-# Controle Financeiro
+# Acha Palavra
 
 ## Sobre o Projecto
 Todo mundo já alguma vez sentiu-se que não consegue controlar a sua vida financeira ou ao menos, saber quanto gasta e quanto recebe. Nesta senda, este **Controle financeiro** permite listar todas as receitas e despesas de um usuário e calcular qual é o saldo actual(diferença entre o total de receitas e despesas).
 
-<img src='./src/assets/img/1 (1).png'>
+<img src='./public/img/Acha jogo LOGO.png'>
 
 ***
 
-<img src='./src/assets/img/1 (1)-horz.jpg'>
+<img src='./public/img/Acha jogo LOGO branco.png'>
 
 
 ## Tecnologias Utilizadas
